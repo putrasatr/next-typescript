@@ -2,3 +2,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* width */
+#tags::-webkit-scrollbar {
+  width: 1px;
+  height: 3px;
+}
+
+/* Handle */
+#tags::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+#tags::-webkit-scrollbar-thumb:hover {
+  background: #f7c59f;
+}
+#search-input:focus {
+  outline: 2px dotted transparent;
+}

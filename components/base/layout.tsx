@@ -1,12 +1,14 @@
 import type { NextPage } from "next";
 import React from "react";
 import { Navbar } from "components";
+import Tags from "./tags";
 
 const Layout: NextPage = ({ children }) => {
   return (
     <main>
       <Navbar />
-      <section className="mt-nav container mx-auto">{children}</section>
+      <Tags />
+      <section className="mt-[126px] container mx-auto">{children}</section>
     </main>
   );
 };

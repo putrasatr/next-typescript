@@ -1,56 +1,51 @@
+import { useOnline } from "hooks";
+import { ImagesProps } from "interfaces";
+import { NextPage } from "next";
+import Image from "next/image";
 import React from "react";
 import { A11y, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-interface CardJumbotronProps {
+export interface CardJumbotronProps {
+  id?: number;
   highlightText: JSX.Element;
   description?: string;
   imageUrl?: string;
+  images?: ImagesProps;
   linkRefer?: string;
   textLink?: string;
+}
+interface Props {
+  jumbotron: CardJumbotronProps[];
 }
 
 const CardJumbotron: React.FC<CardJumbotronProps> = ({
   highlightText,
   description,
-  imageUrl,
+  imageUrl = "/images/bg.png",
   linkRefer,
   textLink,
 }) => {
+  const isOnline = useOnline();
   return (
     <div className="flex w-[100%] h-[500px] bg-grey-2">
-      <h1>Rex {highlightText}</h1>
+      <h1>{highlightText}</h1>
+      {isOnline ? (
+        <Image
+          src={"http://localhost:1339" + imageUrl}
+          alt={description}
+          layout={"fill"}
+        />
+      ) : (
+        <div>
+          <h2 className="text-white">You are Offline</h2>
+        </div>
+      )}
     </div>
   );
 };
 
-const Jumbotron = () => {
-  const dummy = [
-    {
-      id: 0,
-      highlightText: (
-        <h1 className="white">
-          Get up to 30% <span className="text-secondary">New Arrival</span>
-        </h1>
-      ),
-      description: "",
-      imageUrl: "",
-      linkRefer: "",
-      textLink: "",
-    },
-    {
-      id: 0,
-      highlightText: (
-        <h1 className="white">
-          Get up to 30% <span className="text-secondary">New Arrival</span>
-        </h1>
-      ),
-      description: "",
-      imageUrl: "",
-      linkRefer: "",
-      textLink: "",
-    },
-  ];
+const Jumbotron: NextPage<Props> = ({ jumbotron }) => {
   return (
     <div>
       <Swiper
@@ -67,10 +62,13 @@ const Jumbotron = () => {
         effect="cards"
         className="swiper-product"
       >
-        {dummy.map((item) => {
+        {jumbotron.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <CardJumbotron highlightText={item.highlightText} />
+              <CardJumbotron
+                highlightText={item.highlightText}
+                imageUrl={item.images?.data.attributes.url}
+              />
             </SwiperSlide>
           );
         })}

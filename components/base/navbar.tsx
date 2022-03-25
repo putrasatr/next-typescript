@@ -29,12 +29,11 @@ const Navbar = () => {
   const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   }, []);
-  console.log(results);
   return (
     <header className="block fixed top-0 h-[60px] lg:h-nav w-[100%] bg-grey-6 ">
       <div className="container mx-[auto] flex py-[auto] h-[100%] text-primary-1 items-center justify-between">
         <div id="nav-logo" className=" text-[24px] font-[400]">
-          {loading ? "Loading" : "Clothes"}
+          {loading ? "Loading..." : "Clothes😇"}
         </div>
         <div id="nav-search-input" className="hidden lg:flex">
           <Input

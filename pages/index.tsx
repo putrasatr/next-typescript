@@ -1,52 +1,44 @@
 import Jumbotron, { CardJumbotronProps } from "components/cards/jumbotron";
 import type { NextPage } from "next";
 import { fetchAPI } from "lib/api";
-import Image from "next/image";
-import { imageBaseUrl } from "config";
-import { useOnline } from "hooks";
+import { HighlightCard } from "components";
 
 interface Props {
   jumbotron: CardJumbotronProps[];
-  home: string;
 }
 
-const Home: NextPage<Props> = ({ home }) => {
-  const isOnline = useOnline();
+const Home: NextPage<Props> = ({ jumbotron }) => {
   return (
-    <div className="text-3xl font-bold underline">
-      <p>{isOnline === null ? "Load" : isOnline ? "" : "You are offline"}</p>
-      <Image src={imageBaseUrl + home} alt="" width={100} height={400} />
-      {/* <Jumbotron jumbotron={jumbotron} /> */}
-      <iframe></iframe>
+    <div className="text-3xl font-bold">
+      <Jumbotron jumbotron={jumbotron} />
+
+      <div className=" flex flex-col pt-[30px] text-black  place-content-center">
+        <p>Week Highlight</p>
+        <div className="w-[100%]">
+          <HighlightCard />
+        </div>
+      </div>
     </div>
   );
 };
 
 export const getStaticProps = async () => {
-  const homepage = await fetchAPI("/home", {
-    // populate: {
-    //   hero: "*",
-    //   jumbotron: {
-    //     populate: "*",
-    //   },
-    //   seo: {
-    //     populate: "*",
-    //   },
-    // },
+  const homepage = await fetchAPI("/homepage", {
     populate: {
-      hero: {
+      hero: "*",
+      jumbotron: {
+        populate: "*",
+      },
+      seo: {
         populate: "*",
       },
     },
   });
-  const home = homepage.data.attributes.hero;
-  const image = home.image.data.attributes.url;
   return {
     props: {
-      home: image,
-      // jumbotron: homepage.data.attributes.jumbotron,
-      // hero: homepage.data.attributes.hero,
-      // seo: homepage.data.attributes.seo,
+      jumbotron: homepage.data.attributes.jumbotron,
+      hero: homepage.data.attributes.hero,
+      seo: homepage.data.attributes.seo,
     },
   };
 };

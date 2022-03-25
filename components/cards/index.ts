@@ -1,1 +1,1 @@
-export const test = "";
+export { default as HighlightCard } from "./highlight-card";

@@ -1,3 +1,4 @@
+import { imageBaseUrl } from "config";
 import { useOnline } from "hooks";
 import { ImagesProps } from "interfaces";
 import { NextPage } from "next";
@@ -32,7 +33,7 @@ const CardJumbotron: React.FC<CardJumbotronProps> = ({
       <h1>{highlightText}</h1>
       {isOnline ? (
         <Image
-          src={"http://localhost:1339" + imageUrl}
+          src={imageBaseUrl + imageUrl}
           alt={description}
           layout={"fill"}
         />

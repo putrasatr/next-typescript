@@ -10,7 +10,7 @@ interface Props {
 const Home: NextPage<Props> = ({ jumbotron }) => {
   return (
     <div className="text-3xl font-bold">
-      <Jumbotron jumbotron={jumbotron} />
+      {/* <Jumbotron jumbotron={jumbotron} /> */}
 
       <div className=" flex flex-col pt-[30px] text-black  place-content-center">
         <p>Week Highlight</p>

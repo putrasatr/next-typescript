@@ -1,33 +1,58 @@
+import Image from "next/image";
 import React from "react";
 
 const HighlightCard = () => {
-  const dummy = Array.from(Array(4).keys());
+  const dummy = ["exclusive.png", "styles.png", "bag.png", "cotton.png"];
   let n = 1;
   return (
-    <div className="flex flex-col gap-10 lg:gap-16">
+    <div className="grid grid-cols-3 gap-5 w-[80%] mx-[auto] h-[700px] my-[40px] relative">
       {dummy.map((item, index) => {
+        const isEven = (index + 1) % 2 === 0;
+        if (isEven) n++;
+        const isSmall = n % 2 === 0;
         return (
           <div
             key={index}
-            className="flex lg:flex-row flex-col items-center gap-5 lg:gap-16"
+            className={
+              isSmall
+                ? "bg-primary"
+                : "col-span-2" +
+                  " h-[328px] bg-secondary  overflow-hidden w-[100%]"
+            }
           >
-            <div
-              className={`lg:w-6/12 ${
-                index && index % 2 === 0
-                  ? "bg-red-300 order-1"
-                  : "bg-white order-2"
-              }`}
-            >
-              {item}
-            </div>
-            <div
-              className={`lg:w-6/12 ${
-                index && index % 2 === 0
-                  ? "bg-white order-2"
-                  : "bg-red-300 order-1"
-              }`}
-            >
-              <h2 className="text-xl lg:text-4xl font-semibold mb-5">{item}</h2>
+            <div className="relative">
+              <Image
+                src={"/images/assets/" + item}
+                alt="highlight"
+                width="100%"
+                height="100%"
+                layout="responsive"
+                objectFit="fill"
+              />
+              <div
+                className={
+                  "rounded-[15px] absolute right-0 left-0 top-0 flex  justify-center text-white p-5"
+                }
+              >
+                <div className="mx-auto max-w-[90%]">
+                  <p className="text-[46px] font-bold break-words">
+                    {item}lkadmsflkanfk
+                  </p>
+                </div>
+              </div>
+              <div
+                className={
+                  "absolute h-[100px] text-white" +
+                  (isSmall ? " left-5 bottom-5" : "top-0")
+                }
+                style={{ background: "rgba(0,0,0,0.3)" }}
+              >
+                <div className="mx-auto max-w-[90%]">
+                  <p className="text-[16px] font-bold break-words">
+                    {item}lkadmsflkanfk
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         );

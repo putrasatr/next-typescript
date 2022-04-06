@@ -8,7 +8,7 @@ const Layout: NextPage = ({ children }) => {
     <main>
       <Navbar />
       <Tags />
-      <section className="mt-[88px] container mx-auto">{children}</section>
+      <section className="mt-[200px] container mx-auto">{children}</section>
     </main>
   );
 };

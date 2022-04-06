@@ -1,6 +1,7 @@
 import { Input } from "components";
 import { useDebounce, useLoading } from "hooks";
 import { fetchAPI } from "lib/api";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import { navLists } from "store";
@@ -50,7 +51,7 @@ const Navbar = () => {
                 className={router.asPath === item.href ? "active" : ""}
               >
                 <li>
-                  <a href={item.href}>{item.text}</a>
+                  <Link href={item.href}>{item.text}</Link>
                 </li>
               </ul>
             );

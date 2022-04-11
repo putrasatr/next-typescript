@@ -9,7 +9,7 @@ const nextConfig = withPWA({
   },
   images: {
     loader: "default",
-    domains: ["104.248.145.157", "localhost"],
+    domains: ["localhost"],
   },
 });
 

@@ -39,3 +39,5 @@ yarn-error.log*
 
 # pwa
 /public/sw
+sw.js.map
+sw.js
